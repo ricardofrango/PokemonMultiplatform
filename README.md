@@ -1,5 +1,5 @@
 # PokemonMultiplatform
 
-##Resources
+## Resources
 
 Using [this](https://pokeapi.co) api.
