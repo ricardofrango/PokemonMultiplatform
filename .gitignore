@@ -1,0 +1,15 @@
+*.iml
+.gradle
+/local.properties
+/.idea/
+/.gradle/
+/gradle/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+/androidApp/build/
+/iosApp/iosApp.xcodeproj
+!/iosApp/iosApp.xcodeproj/project.pbxproj
