@@ -2,4 +2,4 @@
 
 ## Resources
 
-Using [this](https://pokeapi.co) api.
+Using [PokeAPI](https://pokeapi.co).
