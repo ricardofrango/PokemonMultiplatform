@@ -44,7 +44,7 @@ class PokemonInteractorImpl(
 
     private fun convertToEntity(pokemonDetail: PokemonContract): PokemonEntity {
         return PokemonEntity(
-            name = pokemonDetail.name,
+            name = pokemonDetail.name.capitalize(),
             number = pokemonDetail.order,
             image = pokemonDetail.sprites.front_default,
             url = pokemonDetail.forms.firstOrNull()?.url
