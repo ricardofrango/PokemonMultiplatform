@@ -115,9 +115,8 @@
 		6291F9A62596C081006179C4 /* pokemon_list */ = {
 			isa = PBXGroup;
 			children = (
+				6291F9C525990F4B006179C4 /* list_data_source */,
 				6291F9AE2596C148006179C4 /* PokemonListController.swift */,
-				6291F9BD2596CC2B006179C4 /* PokemonRowCell.swift */,
-				6291F9C125990BEB006179C4 /* PokemonListDataSource.swift */,
 			);
 			path = pokemon_list;
 			sourceTree = "<group>";
@@ -136,6 +135,15 @@
 				7555FF89242A565B00829871 /* LaunchScreen.storyboard */,
 			);
 			path = storyboards;
+			sourceTree = "<group>";
+		};
+		6291F9C525990F4B006179C4 /* list_data_source */ = {
+			isa = PBXGroup;
+			children = (
+				6291F9C125990BEB006179C4 /* PokemonListDataSource.swift */,
+				6291F9BD2596CC2B006179C4 /* PokemonRowCell.swift */,
+			);
+			path = list_data_source;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
