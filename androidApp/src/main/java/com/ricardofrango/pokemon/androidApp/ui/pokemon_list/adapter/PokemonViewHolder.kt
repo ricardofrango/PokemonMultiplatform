@@ -10,6 +10,7 @@ class PokemonViewHolder(view: PokemonRowView) : RecyclerView.ViewHolder(view) {
         itemClickedCallback: (itemClicked: PokemonItemModel, posClicked: Int, viewClicked: View) -> Unit
     ) {
         (itemView as PokemonRowView).bind(pokemonItemModel)
+        itemView.setOnClickListener { itemClickedCallback.invoke(pokemonItemModel, adapterPosition, it) }
     }
 
 }

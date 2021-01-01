@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kennyc.view.MultiStateView
 import com.ricardofrango.pokemon.androidApp.BaseActivity
 import com.ricardofrango.pokemon.androidApp.R
+import com.ricardofrango.pokemon.androidApp.ui.pokemon_detail.PokemonDetailActivity
 import com.ricardofrango.pokemon.androidApp.ui.pokemon_list.adapter.IPokemonsAdapter
 import com.ricardofrango.pokemon.androidApp.ui.pokemon_list.adapter.PokemonsAdapter
 import com.ricardofrango.pokemon.pokemon_domain.interactor.PokemonInteractorImpl
@@ -70,6 +71,6 @@ class PokemonsListActivity : BaseActivity<PokemonListPresenter, PokemonListView>
         posClicked: Int,
         viewClicked: View
     ) {
-
+        PokemonDetailActivity.startPokemonDetailActivity(this, itemClicked.number)
     }
 }

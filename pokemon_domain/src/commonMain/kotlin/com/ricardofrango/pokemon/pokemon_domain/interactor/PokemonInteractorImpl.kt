@@ -1,5 +1,6 @@
 package com.ricardofrango.pokemon.pokemon_domain.interactor
 
+import com.ricardofrango.pokemon.pokemon_domain.interactor.models.PokemonDetailEntity
 import com.ricardofrango.pokemon.pokemon_domain.interactor.models.PokemonEntity
 import com.ricardofrango.pokemon.pokemon_domain.interactor.models.PokemonListEntity
 import com.ricardofrango.pokemon.pokemon_domain.networking.models.PokemonContract
@@ -42,13 +43,27 @@ class PokemonInteractorImpl(
         return convertToEntity(pokemonDetail)
     }
 
+    override suspend fun getPokemonDetails(id: Int): PokemonDetailEntity {
+        val pokemonDetail = pokemonRepository.getPokemonByNumber(id)
+        return convertToDetailsEntity(pokemonDetail)
+    }
+
     private fun convertToEntity(pokemonDetail: PokemonContract): PokemonEntity {
         return PokemonEntity(
             name = pokemonDetail.name.capitalize(),
-            number = pokemonDetail.order,
+            number = pokemonDetail.id,
             image = pokemonDetail.sprites.front_default,
             url = pokemonDetail.forms.firstOrNull()?.url
-                ?: "https://pokeapi.co/api/v2/pokemon/${pokemonDetail.order}"
+                ?: "https://pokeapi.co/api/v2/pokemon/${pokemonDetail.id}"
+        )
+    }
+    private fun convertToDetailsEntity(pokemonDetail: PokemonContract): PokemonDetailEntity {
+        return PokemonDetailEntity(
+            name = pokemonDetail.name.capitalize(),
+            number = pokemonDetail.id,
+            image = pokemonDetail.sprites.front_default,
+            url = pokemonDetail.forms.firstOrNull()?.url
+                ?: "https://pokeapi.co/api/v2/pokemon/${pokemonDetail.id}"
         )
     }
 

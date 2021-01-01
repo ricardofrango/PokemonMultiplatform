@@ -7,6 +7,8 @@ import kotlinx.serialization.Serializable
 data class PokemonContract(
     @SerialName("name")
     val name: String,
+    @SerialName("id")
+    val id: Int,
     @SerialName("order")
     val order: Int,
     @SerialName("sprites")

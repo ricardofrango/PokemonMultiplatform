@@ -19,7 +19,9 @@ class PokemonHttpClient {
 
     private val httpClient = HttpClient {
         install(JsonFeature) {
-            val json = Json { ignoreUnknownKeys = true }
+            val json = Json {
+                ignoreUnknownKeys = true
+            }
             serializer = KotlinxSerializer(json)
         }
     }

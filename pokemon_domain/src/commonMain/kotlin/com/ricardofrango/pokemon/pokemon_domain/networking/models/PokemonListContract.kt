@@ -8,9 +8,9 @@ data class PokemonListContract(
     @SerialName("count")
     val count: Int,
     @SerialName("next")
-    val next: String?,
+    val next: String? = null,
     @SerialName("previous")
-    val previous: String?,
+    val previous: String? = null,
     @SerialName("results")
     val results: List<PokemonResumeContract>
 )
