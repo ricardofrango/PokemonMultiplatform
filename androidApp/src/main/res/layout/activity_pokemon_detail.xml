@@ -20,22 +20,67 @@
                 android:id="@+id/ivHeader"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@id/tvPokemonName"
+                app:layout_constraintBottom_toTopOf="@id/tvPokemonNumber"
                 app:layout_constraintDimensionRatio="H,16:9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivPokemonNumberBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bk_round"
+                app:layout_constraintBottom_toBottomOf="@id/tvPokemonNumber"
+                app:layout_constraintEnd_toEndOf="@id/tvPokemonNumber"
+                app:layout_constraintStart_toStartOf="@id/tvPokemonNumber"
+                app:layout_constraintTop_toTopOf="@id/tvPokemonNumber" />
+
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvPokemonName"
+                android:id="@+id/tvPokemonNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toTopOf="@id/bPokemonNameTypeBarrier"
+                app:layout_constraintEnd_toStartOf="@id/tvPokemonTypes"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivHeader"
+                tools:text="Baulbasaur" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPokemonTypes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:textSize="26sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/bPokemonNameTypeBarrier"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvPokemonNumber"
                 app:layout_constraintTop_toBottomOf="@id/ivHeader"
+                tools:text="Baulbasaur" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/bPokemonNameTypeBarrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="tvPokemonNumber,tvPokemonTypes" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPokemonGeneration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bPokemonNameTypeBarrier"
                 tools:text="Baulbasaur" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

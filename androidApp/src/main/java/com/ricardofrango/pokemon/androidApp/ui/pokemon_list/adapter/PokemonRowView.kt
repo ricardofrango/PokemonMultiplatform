@@ -32,7 +32,11 @@ class PokemonRowView @JvmOverloads constructor(
 
     @SuppressLint("SetTextI18n")
     fun bind(pokemonItemModel: PokemonItemModel, listMode: ListMode) {
-        Glide.with(context).load(pokemonItemModel.imageUrl).into(pokemonImage)
+        pokemonItemModel.imageUrl?.let {
+            pokemonImage.visibility = VISIBLE
+            Glide.with(context).load(it).into(pokemonImage)
+        } ?: run { pokemonImage.visibility = GONE }
+
 
         when (listMode) {
             ListMode.GRID -> {

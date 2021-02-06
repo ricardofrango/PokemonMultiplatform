@@ -11,8 +11,12 @@ data class PokemonContract(
     val id: Int,
     @SerialName("order")
     val order: Int,
+    @SerialName("species")
+    val species: PokemonSpecieContract,
     @SerialName("sprites")
     val sprites: PokemonSpriteContract,
     @SerialName("forms")
-    val forms: List<PokemonFormContract>
+    val forms: List<PokemonFormContract>,
+    @SerialName("types")
+    val types: List<PokemonTypeContract>
 )

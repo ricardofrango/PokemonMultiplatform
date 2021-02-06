@@ -30,6 +30,7 @@ class PokemonDetailPresenter(private val pokemonInteractor: PokemonInteractor) :
 
                 view?.showPokemonDetails(pokemonDetailModel)
             } catch (error: Exception) {
+                error.printStackTrace()
                 view?.errorLoadingPokemonDetails()
             }
         }
@@ -40,7 +41,11 @@ class PokemonDetailPresenter(private val pokemonInteractor: PokemonInteractor) :
             name = pokemonDetail.name,
             number = pokemonDetail.number,
             image = pokemonDetail.image,
-            url = pokemonDetail.url
+            url = pokemonDetail.url,
+            color = pokemonDetail.color,
+            isDarkColor = pokemonDetail.isDarkColor,
+            types = pokemonDetail.types,
+            generation = pokemonDetail.generation
         )
     }
 }

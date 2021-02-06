@@ -1,11 +1,14 @@
 package com.ricardofrango.pokemon.androidApp.ui.pokemon_detail
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kennyc.view.MultiStateView
 import com.ricardofrango.pokemon.androidApp.BaseActivity
@@ -37,11 +40,16 @@ class PokemonDetailActivity : BaseActivity<PokemonDetailPresenter, PokemonDetail
 
     private val pokemonDetailMSV : MultiStateView by lazy { findViewById(R.id.msvPokemonDetail) }
     private val pokemonDetailHeader : AppCompatImageView by lazy { findViewById(R.id.ivHeader) }
-    private val pokemonDetailName : AppCompatTextView by lazy { findViewById(R.id.tvPokemonName) }
+    private val pokemonDetailNumber : AppCompatTextView by lazy { findViewById(R.id.tvPokemonNumber) }
+    private val pokemonNumberBackground : AppCompatImageView by lazy { findViewById(R.id.ivPokemonNumberBackground) }
+    private val pokemonTypes : AppCompatTextView by lazy { findViewById(R.id.tvPokemonTypes) }
+    private val pokemonGeneration : AppCompatTextView by lazy { findViewById(R.id.tvPokemonGeneration) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pokemon_detail)
+
+        supportActionBar?.hide()
     }
 
     override fun loadingPokemonDetails() {
@@ -52,9 +60,24 @@ class PokemonDetailActivity : BaseActivity<PokemonDetailPresenter, PokemonDetail
         pokemonDetailMSV.viewState = MultiStateView.ViewState.ERROR
     }
 
+    @SuppressLint("SetTextI18n")
     override fun showPokemonDetails(pokemonDetailModel: PokemonDetailModel) {
-        Glide.with(this).load(pokemonDetailModel.image).into(pokemonDetailHeader)
-        pokemonDetailName.text = pokemonDetailModel.name
+        supportActionBar?.title = pokemonDetailModel.name
+        supportActionBar?.show()
+
+        pokemonDetailModel.image?.let {
+            pokemonDetailHeader.visibility = VISIBLE
+            Glide.with(this).load(it).into(pokemonDetailHeader)
+        } ?: run { pokemonDetailHeader.visibility = GONE }
+
+        val color = if (pokemonDetailModel.isDarkColor) R.color.white else R.color.black
+
+        pokemonDetailNumber.setTextColor(resources.getColor(color, theme))
+        pokemonDetailNumber.text = "${pokemonDetailModel.number}"
+        pokemonNumberBackground.imageTintList = ColorStateList.valueOf(pokemonDetailModel.color)
+
+        pokemonTypes.text = pokemonDetailModel.types
+        pokemonGeneration.text = pokemonDetailModel.generation
 
         pokemonDetailMSV.viewState = MultiStateView.ViewState.CONTENT
     }

@@ -1,7 +1,9 @@
 package com.ricardofrango.pokemon.pokemon_domain.networking
 
 import com.ricardofrango.pokemon.pokemon_domain.networking.models.PokemonContract
+import com.ricardofrango.pokemon.pokemon_domain.networking.models.PokemonEvolutionChainDetailContract
 import com.ricardofrango.pokemon.pokemon_domain.networking.models.PokemonListContract
+import com.ricardofrango.pokemon.pokemon_domain.networking.models.PokemonSpecieDetailContract
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
@@ -35,6 +37,14 @@ class PokemonHttpClient {
     }
 
     suspend fun getPokemonByPath(path : String): PokemonContract {
+        return httpClient.get(path)
+    }
+
+    suspend fun getPokemonSpecie(path : String): PokemonSpecieDetailContract {
+        return httpClient.get(path)
+    }
+
+    suspend fun getPokemonEvolutionChain(path: String): PokemonEvolutionChainDetailContract {
         return httpClient.get(path)
     }
 }

@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PokemonSpriteContract(
     @SerialName("back_default")
-    val back_default: String,
+    val back_default: String? = null,
     @SerialName("back_female")
     val back_female: String? = null,
     @SerialName("back_shiny")
@@ -14,7 +14,7 @@ data class PokemonSpriteContract(
     @SerialName("back_shiny_female")
     val back_shiny_female: String? = null,
     @SerialName("front_default")
-    val front_default: String,
+    val front_default: String? = null,
     @SerialName("front_female")
     val front_female: String? = null,
     @SerialName("front_shiny")
