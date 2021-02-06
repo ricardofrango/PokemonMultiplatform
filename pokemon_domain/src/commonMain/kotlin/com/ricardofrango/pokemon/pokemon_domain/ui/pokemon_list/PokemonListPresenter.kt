@@ -10,6 +10,9 @@ import kotlinx.coroutines.launch
 class PokemonListPresenter(private val pokemonInteractor: PokemonInteractor) :
     BasePresenter<PokemonListView>() {
 
+    private var alertedForEndOfList: Boolean = false
+    private var nextPage: String? = null
+
     override fun bindView(view: PokemonListView) {
         super.bindView(view)
 
@@ -20,20 +23,30 @@ class PokemonListPresenter(private val pokemonInteractor: PokemonInteractor) :
         launch {
             view?.loadingPokemonsList()
             try {
-                view?.showPokemonsList(getPokemons(0))
+                val pokemons = getPokemons(0)
+                view?.showPokemonsList(pokemons)
+                nextPage = pokemons.nextPage
             } catch (error: Exception) {
                 view?.errorLoadingPokemonsList()
             }
         }
     }
 
-    private fun getMorePokemons(nextPage: String) {
-        launch {
-            view?.loadingMorePokemons()
-            try {
-                view?.showMorePokemonsList(getPokemons(nextPage))
-            } catch (error: Exception) {
-                view?.errorLoadingMorePokemons()
+    fun getMorePokemons() {
+        nextPage?.let {
+            launch {
+                view?.loadingMorePokemons()
+                try {
+                    val pokemons = getPokemons(it)
+                    view?.showMorePokemonsList(pokemons)
+                    nextPage = pokemons.nextPage
+                } catch (error: Exception) {
+                    view?.errorLoadingMorePokemons()
+                }
+            }
+        } ?: run {
+            if (!alertedForEndOfList) {
+                view?.noMorePokemonsToLoad()
             }
         }
     }

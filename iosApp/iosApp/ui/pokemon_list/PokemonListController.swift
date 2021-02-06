@@ -10,9 +10,9 @@ import Foundation
 import pokemon_domain
 import UIKit
 
-class PokemonListController : BaseController<PokemonListPresenter, PokemonListView>, PokemonListView {
+class PokemonListController : BaseController<PokemonListPresenter, PokemonListView>, PokemonListView, PokemonListClickProtocol {
         
-    private var pokemonListDataSource : PokemonListDataSource = PokemonListDataSource()
+    private let pokemonListDataSource : PokemonListDataSource = PokemonListDataSource()
     
     override func createPresenter() -> PokemonListPresenter? {
         return PokemonListPresenter(pokemonInteractor: PokemonInteractorImpl(pokemonRepository: PokemonRepositoryImpl.init(pokemonHttpClient: PokemonHttpClient())))
@@ -20,6 +20,8 @@ class PokemonListController : BaseController<PokemonListPresenter, PokemonListVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        pokemonListDataSource.onItemClicked = self
         pokemonListDataSource.setupTableView(view : self.view)
     }
     
@@ -47,4 +49,15 @@ class PokemonListController : BaseController<PokemonListPresenter, PokemonListVi
         pokemonListDataSource.addPokemonItems(pokemonList: pokemonListModel)
     }
     
+    func onPokemonClicked(pokemonClicked: PokemonItemModel) {
+        let pokemonDetailController = self.storyboard?.instantiateViewController(identifier: "PokemonDetailController") as! PokemonDetailController
+        
+        pokemonDetailController.pokemonNumber = pokemonClicked.number
+        
+        let nvc = self.storyboard?.instantiateViewController(withIdentifier: "NVC") as! UINavigationController
+        
+        nvc.pushViewController(pokemonDetailController, animated: true)
+        
+        self.navigationController?.pushViewController(nvc, animated: true)
+    }
 }

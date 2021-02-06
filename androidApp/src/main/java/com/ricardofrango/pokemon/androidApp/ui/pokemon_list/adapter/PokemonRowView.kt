@@ -19,6 +19,7 @@ class PokemonRowView @JvmOverloads constructor(
 
     private val pokemonImage: AppCompatImageView by lazy { findViewById(R.id.ivPokemonImage) }
     private val pokemonName: AppCompatTextView by lazy { findViewById(R.id.tvPokemonName) }
+    private val pokemonNumber: AppCompatTextView by lazy { findViewById(R.id.tvPokemonNumber) }
 
     init {
         inflate(context, R.layout.row_pokemon, this)
@@ -29,6 +30,7 @@ class PokemonRowView @JvmOverloads constructor(
 
     fun bind(pokemonItemModel: PokemonItemModel) {
         Glide.with(context).load(pokemonItemModel.imageUrl).into(pokemonImage)
+        pokemonNumber.text = "${pokemonItemModel.number}"
         pokemonName.text = pokemonItemModel.name
     }
 

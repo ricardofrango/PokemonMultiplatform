@@ -12,6 +12,7 @@ import UIKit
 
 class PokemonListDataSource : NSObject, UITableViewDelegate, UITableViewDataSource {
     
+    var onItemClicked : PokemonListClickProtocol?
     private var pokemonsList : [PokemonItemModel] = []
     
     let tableview: UITableView = {
@@ -27,11 +28,17 @@ class PokemonListDataSource : NSObject, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let pokemon = pokemonsList[indexPath.row]
         let cell = tableview.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! PokemonRowCell
         cell.backgroundColor = UIColor.white
-        cell.dayLabel.text = pokemonsList[indexPath.row].name
-        downloadImage(uiImageView: cell.imageUiView, from: URL.init(string: pokemonsList[indexPath.row].imageUrl)!)
+        cell.dayLabel.text = pokemon.name
+        downloadImage(uiImageView: cell.imageUiView, from: URL.init(string: pokemon.imageUrl)!)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let pokemon = pokemonsList[indexPath.row]
+        onItemClicked?.onPokemonClicked(pokemonClicked: pokemon)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

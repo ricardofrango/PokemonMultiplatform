@@ -2,6 +2,7 @@ package com.ricardofrango.pokemon.androidApp.ui.pokemon_list
 
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kennyc.view.MultiStateView
 import com.ricardofrango.pokemon.androidApp.BaseActivity
@@ -30,15 +31,25 @@ class PokemonsListActivity : BaseActivity<PokemonListPresenter, PokemonListView>
         )
     }
 
-    private val pokemonList : RecyclerView by lazy { findViewById(R.id.rvPokemonsList) }
-    private val pokemonsMSV : MultiStateView by lazy { findViewById(R.id.msvPokemonsList) }
-    private val pokemonsListAdapter : PokemonsAdapter by lazy { PokemonsAdapter(this) }
+    private val pokemonList: RecyclerView by lazy { findViewById(R.id.rvPokemonsList) }
+    private val pokemonsMSV: MultiStateView by lazy { findViewById(R.id.msvPokemonsList) }
+    private val pokemonsListAdapter: PokemonsAdapter by lazy { PokemonsAdapter(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pokemons_list)
 
-        pokemonList.adapter = pokemonsListAdapter
+        pokemonList.run {
+            adapter = pokemonsListAdapter
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if ((recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition() > pokemonsListAdapter.itemCount - 3 && !pokemonsListAdapter.isLoadingMore()) {
+                        presenter.getMorePokemons()
+                    }
+                }
+            })
+        }
     }
 
     override fun loadingPokemonsList() {
@@ -46,7 +57,7 @@ class PokemonsListActivity : BaseActivity<PokemonListPresenter, PokemonListView>
     }
 
     override fun loadingMorePokemons() {
-
+        pokemonsListAdapter.showLoadingMore()
     }
 
     override fun showPokemonsList(pokemonListModel: PokemonsListModel) {
@@ -55,7 +66,7 @@ class PokemonsListActivity : BaseActivity<PokemonListPresenter, PokemonListView>
     }
 
     override fun showMorePokemonsList(pokemons: PokemonsListModel) {
-
+        pokemonsListAdapter.addItems(pokemons.pokemons)
     }
 
     override fun errorLoadingPokemonsList() {
@@ -63,6 +74,10 @@ class PokemonsListActivity : BaseActivity<PokemonListPresenter, PokemonListView>
     }
 
     override fun errorLoadingMorePokemons() {
+        pokemonsListAdapter.hideLoadingMore()
+    }
+
+    override fun noMorePokemonsToLoad() {
 
     }
 

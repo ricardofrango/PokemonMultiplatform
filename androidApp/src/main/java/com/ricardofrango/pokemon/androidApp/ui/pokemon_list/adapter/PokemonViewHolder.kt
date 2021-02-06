@@ -4,7 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.ricardofrango.pokemon.pokemon_domain.ui.pokemon_list.models.PokemonItemModel
 
-class PokemonViewHolder(view: PokemonRowView) : RecyclerView.ViewHolder(view) {
+class PokemonViewHolder(view: PokemonRowView) : PokemonsAdapterViewHolder(view) {
     fun bind(
         pokemonItemModel: PokemonItemModel,
         itemClickedCallback: (itemClicked: PokemonItemModel, posClicked: Int, viewClicked: View) -> Unit

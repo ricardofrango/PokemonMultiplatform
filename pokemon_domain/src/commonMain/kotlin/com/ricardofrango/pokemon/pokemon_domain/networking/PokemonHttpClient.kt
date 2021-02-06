@@ -26,7 +26,7 @@ class PokemonHttpClient {
         }
     }
 
-    suspend fun getPokemons(offset : Int, limit : Int = 40): PokemonListContract {
+    suspend fun getPokemons(offset : Int, limit : Int = 99): PokemonListContract {
         return httpClient.get(POKEMON_LIST.replace("[OFFSET]", offset.toString()).replace("[LIMIT]", limit.toString()))
     }
 

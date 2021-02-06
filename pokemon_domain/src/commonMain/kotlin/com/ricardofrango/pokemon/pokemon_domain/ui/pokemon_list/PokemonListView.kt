@@ -10,4 +10,5 @@ interface PokemonListView : BaseView {
     fun showMorePokemonsList(pokemons: PokemonsListModel)
     fun errorLoadingPokemonsList()
     fun errorLoadingMorePokemons()
+    fun noMorePokemonsToLoad()
 }

@@ -22,7 +22,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ktl-hA-hxO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="35" y="73"/>
+            <point key="canvasLocation" x="80" y="80"/>
+        </scene>
+        <!--Pokemon Detail Controller-->
+        <scene sceneID="Czo-0t-Qn5">
+            <objects>
+                <viewController storyboardIdentifier="PokemonDetailController" id="ABS-QQ-7k3" customClass="PokemonDetailController" customModule="iosApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TTD-ly-DkR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="i4q-9R-P5y"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wAj-qf-9rg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1599" y="80"/>
         </scene>
     </scenes>
     <resources>

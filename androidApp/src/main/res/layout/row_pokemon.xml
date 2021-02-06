@@ -7,6 +7,15 @@
     tools:orientation="horizontal"
     tools:parentTag="androidx.appcompat.widget.LinearLayoutCompat">
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvPokemonNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        tools:text="1" />
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivPokemonImage"
         android:layout_width="75dp"
