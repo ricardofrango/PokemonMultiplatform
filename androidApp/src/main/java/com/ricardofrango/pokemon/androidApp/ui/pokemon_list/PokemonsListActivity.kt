@@ -37,9 +37,9 @@ class PokemonsListActivity : BaseActivity<PokemonListPresenter, PokemonListView>
 
     private val pokemonList: RecyclerView by lazy { findViewById(R.id.rvPokemonsList) }
     private val pokemonsMSV: MultiStateView by lazy { findViewById(R.id.msvPokemonsList) }
-    private val pokemonsListAdapter: PokemonsAdapter by lazy { PokemonsAdapter(this,) }
+    private val pokemonsListAdapter: PokemonsAdapter by lazy { PokemonsAdapter(this) }
 
-    private var listMode : ListMode = ListMode.LIST
+    private var listMode: ListMode = ListMode.LIST
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,7 +84,7 @@ class PokemonsListActivity : BaseActivity<PokemonListPresenter, PokemonListView>
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.list_mode -> {
                 listMode = when (listMode) {
                     ListMode.GRID -> ListMode.LIST
@@ -104,8 +104,16 @@ class PokemonsListActivity : BaseActivity<PokemonListPresenter, PokemonListView>
 
     private fun refreshListMode() {
         when (listMode) {
-            ListMode.GRID ->  pokemonList.layoutManager = GridLayoutManager(this, 3)
-            ListMode.LIST ->  pokemonList.layoutManager = LinearLayoutManager(this)
+            ListMode.GRID -> {
+                pokemonList.layoutManager = GridLayoutManager(this, 3).also {
+                    it.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                        override fun getSpanSize(position: Int): Int {
+                            return pokemonsListAdapter.getSpanCountAt(position)
+                        }
+                    }
+                }
+            }
+            ListMode.LIST -> pokemonList.layoutManager = LinearLayoutManager(this)
         }
         pokemonsListAdapter.setListMode(listMode)
     }

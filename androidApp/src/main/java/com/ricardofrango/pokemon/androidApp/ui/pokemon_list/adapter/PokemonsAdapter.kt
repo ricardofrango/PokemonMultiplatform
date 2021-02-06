@@ -81,4 +81,10 @@ class PokemonsAdapter(
         this.listMode = listMode
         notifyItemRangeChanged(0, pokemonsList.size)
     }
+
+    fun getSpanCountAt(position: Int): Int {
+        return if (getItemViewType(position) == LOADING_MORE) {
+            3
+        } else 1
+    }
 }

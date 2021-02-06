@@ -34,12 +34,13 @@ class PokemonRowView @JvmOverloads constructor(
     fun bind(pokemonItemModel: PokemonItemModel, listMode: ListMode) {
         Glide.with(context).load(pokemonItemModel.imageUrl).into(pokemonImage)
 
-        when(listMode) {
+        when (listMode) {
             ListMode.GRID -> {
                 gravity = CENTER
                 orientation = VERTICAL
                 pokemonName.layoutParams = LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
                 pokemonNumber.visibility = GONE
+                setPadding(8, 50, 8, 50)
 
                 pokemonName.text = "${pokemonItemModel.number} - ${pokemonItemModel.name}"
             }
@@ -48,6 +49,7 @@ class PokemonRowView @JvmOverloads constructor(
                 orientation = HORIZONTAL
                 pokemonName.layoutParams = LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
                 pokemonNumber.visibility = VISIBLE
+                setPadding(0, 0, 0, 0)
 
                 pokemonNumber.text = "${pokemonItemModel.number}"
                 pokemonName.text = pokemonItemModel.name
