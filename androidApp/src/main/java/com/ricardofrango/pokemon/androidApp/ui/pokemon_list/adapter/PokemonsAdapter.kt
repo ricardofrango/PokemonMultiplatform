@@ -1,14 +1,14 @@
 package com.ricardofrango.pokemon.androidApp.ui.pokemon_list.adapter
 
-import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ricardofrango.pokemon.androidApp.ui.pokemon_list.ListMode
 import com.ricardofrango.pokemon.pokemon_domain.ui.pokemon_list.models.PokemonItemModel
 import java.lang.RuntimeException
 
 class PokemonsAdapter(
     private val callback: IPokemonsAdapter,
-    private val pokemonsList: MutableList<PokemonItemModel> = mutableListOf()
+    private val pokemonsList: MutableList<PokemonItemModel> = mutableListOf(),
 ) : RecyclerView.Adapter<PokemonsAdapterViewHolder>() {
 
     companion object {
@@ -17,6 +17,7 @@ class PokemonsAdapter(
     }
 
     private var showLoadingMore = false
+    private var listMode: ListMode = ListMode.LIST
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonsAdapterViewHolder {
         return when (viewType) {
@@ -29,7 +30,7 @@ class PokemonsAdapter(
     override fun onBindViewHolder(holder: PokemonsAdapterViewHolder, position: Int) {
         when(holder.itemViewType) {
             POKEMON -> {
-                (holder as PokemonViewHolder).bind(pokemonsList[position]) { itemClicked, posClicked, viewClicked ->
+                (holder as PokemonViewHolder).bind(pokemonsList[position], listMode) { itemClicked, posClicked, viewClicked ->
                     callback.onPokemonClicked(itemClicked, posClicked, viewClicked)
                 }
             }
@@ -74,5 +75,10 @@ class PokemonsAdapter(
     fun hideLoadingMore() {
         showLoadingMore = false
         notifyItemRemoved(pokemonsList.size + 1)
+    }
+
+    fun setListMode(listMode: ListMode) {
+        this.listMode = listMode
+        notifyItemRangeChanged(0, pokemonsList.size)
     }
 }
