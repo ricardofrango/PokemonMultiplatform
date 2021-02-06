@@ -6,7 +6,11 @@ import androidx.core.graphics.ColorUtils
 actual class Platform actual constructor() {
     actual val platform: String = "Android ${android.os.Build.VERSION.SDK_INT}"
     actual fun getColorFrom(text: String) : Int {
-        return Color.parseColor(text)
+        return try {
+            Color.parseColor(text)
+        } catch (error : IllegalArgumentException) {
+            Color.BLACK
+        }
     }
 
     actual fun isDark(color: Int): Boolean {

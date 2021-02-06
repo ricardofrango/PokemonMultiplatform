@@ -84,11 +84,11 @@ class PokemonInteractorImpl(
             image = getImageFromPokemonDetail(pokemonDetail),
             url = pokemonDetail.forms.firstOrNull()?.url
                 ?: "https://pokeapi.co/api/v2/pokemon/${pokemonDetail.id}",
-            types = pokemonDetail.types.joinToString(", ") { it.type.name },
+            types = pokemonDetail.types.joinToString(", ") { it.type.name.capitalize() },
             evolutionChain = convertToChainEntity(evolutionChain.chain)
                 .map { convertSpecieToPokemonDetail(it) },
             varieties = varieties.map { convertToEntity(it) },
-            generation = pokemonSpecie.generation.name,
+            generation = pokemonSpecie.generation.name.capitalize(),
             color = pokemonColor,
             isDarkColor = platform.isDark(pokemonColor)
         )

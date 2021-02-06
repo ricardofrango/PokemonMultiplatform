@@ -45,14 +45,14 @@
                 android:textStyle="bold"
                 android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toTopOf="@id/bPokemonNameTypeBarrier"
-                app:layout_constraintEnd_toStartOf="@id/tvPokemonTypes"
+                app:layout_constraintEnd_toStartOf="@id/tvPokemonGeneration"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ivHeader"
                 tools:text="Baulbasaur" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvPokemonTypes"
+                android:id="@+id/tvPokemonGeneration"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
@@ -69,10 +69,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:barrierDirection="bottom"
-                app:constraint_referenced_ids="tvPokemonNumber,tvPokemonTypes" />
+                app:constraint_referenced_ids="tvPokemonNumber,tvPokemonGeneration" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvPokemonGeneration"
+                android:id="@+id/tvPokemonType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"

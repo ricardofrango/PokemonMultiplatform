@@ -42,8 +42,8 @@ class PokemonDetailActivity : BaseActivity<PokemonDetailPresenter, PokemonDetail
     private val pokemonDetailHeader : AppCompatImageView by lazy { findViewById(R.id.ivHeader) }
     private val pokemonDetailNumber : AppCompatTextView by lazy { findViewById(R.id.tvPokemonNumber) }
     private val pokemonNumberBackground : AppCompatImageView by lazy { findViewById(R.id.ivPokemonNumberBackground) }
-    private val pokemonTypes : AppCompatTextView by lazy { findViewById(R.id.tvPokemonTypes) }
     private val pokemonGeneration : AppCompatTextView by lazy { findViewById(R.id.tvPokemonGeneration) }
+    private val pokemonType : AppCompatTextView by lazy { findViewById(R.id.tvPokemonType) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +76,7 @@ class PokemonDetailActivity : BaseActivity<PokemonDetailPresenter, PokemonDetail
         pokemonDetailNumber.text = "${pokemonDetailModel.number}"
         pokemonNumberBackground.imageTintList = ColorStateList.valueOf(pokemonDetailModel.color)
 
-        pokemonTypes.text = pokemonDetailModel.types
+        pokemonType.text = pokemonDetailModel.types
         pokemonGeneration.text = pokemonDetailModel.generation
 
         pokemonDetailMSV.viewState = MultiStateView.ViewState.CONTENT
