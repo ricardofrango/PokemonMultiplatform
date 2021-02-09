@@ -10,4 +10,5 @@ interface PokemonInteractor {
     suspend fun getPokemonList(offset: Int = 0): PokemonListEntity
     suspend fun getPokemon(number: Int): PokemonEntity
     suspend fun getPokemonDetails(id: Int): PokemonDetailEntity
+    suspend fun getPokemonDetails(pokemonUrl: String): PokemonDetailEntity
 }

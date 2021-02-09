@@ -1,10 +1,7 @@
 package com.ricardofrango.pokemon.pokemon_domain.interactor
 
 import com.ricardofrango.pokemon.pokemon_domain.Platform
-import com.ricardofrango.pokemon.pokemon_domain.interactor.models.ChainEntity
-import com.ricardofrango.pokemon.pokemon_domain.interactor.models.PokemonDetailEntity
-import com.ricardofrango.pokemon.pokemon_domain.interactor.models.PokemonEntity
-import com.ricardofrango.pokemon.pokemon_domain.interactor.models.PokemonListEntity
+import com.ricardofrango.pokemon.pokemon_domain.interactor.models.*
 import com.ricardofrango.pokemon.pokemon_domain.networking.models.*
 import com.ricardofrango.pokemon.pokemon_domain.repository.PokemonRepository
 import io.ktor.http.*
@@ -49,6 +46,15 @@ class PokemonInteractorImpl(
 
     override suspend fun getPokemonDetails(id: Int): PokemonDetailEntity {
         val pokemonDetail = pokemonRepository.getPokemonByNumber(id)
+        return buildPokemonDetails(pokemonDetail)
+    }
+
+    override suspend fun getPokemonDetails(pokemonUrl: String): PokemonDetailEntity {
+        val pokemonDetail = pokemonRepository.getPokemonByUrl(pokemonUrl)
+        return buildPokemonDetails(pokemonDetail)
+    }
+
+    private suspend fun buildPokemonDetails(pokemonDetail: PokemonContract): PokemonDetailEntity {
         val pokemonSpecie = pokemonRepository.getPokemonSpecie(pokemonDetail.species.url)
         val evolutionChain =
             pokemonRepository.getPokemonEvolutionChain(pokemonSpecie.evolution_chain.url)
@@ -66,8 +72,8 @@ class PokemonInteractorImpl(
             name = pokemonDetail.name.capitalize(),
             number = pokemonDetail.id,
             image = getImageFromPokemonDetail(pokemonDetail),
-            url = pokemonDetail.forms.firstOrNull()?.url
-                ?: "https://pokeapi.co/api/v2/pokemon/${pokemonDetail.id}"
+            url = /*pokemonDetail.forms.firstOrNull()?.url
+                ?: */"https://pokeapi.co/api/v2/pokemon/${pokemonDetail.id}"
         )
     }
 
@@ -81,7 +87,7 @@ class PokemonInteractorImpl(
         return PokemonDetailEntity(
             name = pokemonDetail.name.capitalize(),
             number = pokemonDetail.id,
-            image = getImageFromPokemonDetail(pokemonDetail),
+            images = getImagesFromPokemonDetail(pokemonDetail),
             url = pokemonDetail.forms.firstOrNull()?.url
                 ?: "https://pokeapi.co/api/v2/pokemon/${pokemonDetail.id}",
             types = pokemonDetail.types.joinToString(", ") { it.type.name.capitalize() },
@@ -94,9 +100,45 @@ class PokemonInteractorImpl(
         )
     }
 
+    private fun getImagesFromPokemonDetail(pokemonDetail: PokemonContract): List<ImageEntity> {
+        return listOf(
+            ImageEntity(
+                image = pokemonDetail.sprites.other.official_artwork.front_default,
+                name = "Official Artwork Front"
+            ),
+            ImageEntity(
+                image = pokemonDetail.sprites.other.dream_world.front_default,
+                name = "Dream World From"
+            ),
+            ImageEntity(
+                image = pokemonDetail.sprites.other.dream_world.front_female,
+                name = "Dream World From Female"
+            ),
+            ImageEntity(image = pokemonDetail.sprites.front_default, name = "Front Male"),
+            ImageEntity(image = pokemonDetail.sprites.front_shiny, name = "Front Male Shiny"),
+            ImageEntity(image = pokemonDetail.sprites.front_female, name = "Front Female"),
+            ImageEntity(
+                image = pokemonDetail.sprites.front_shiny_female,
+                name = "Front Female Shiny"
+            ),
+            ImageEntity(image = pokemonDetail.sprites.back_default, name = "Back Male"),
+            ImageEntity(image = pokemonDetail.sprites.back_shiny, name = "Back Male Shiny"),
+            ImageEntity(image = pokemonDetail.sprites.back_female, name = "Back Female"),
+            ImageEntity(
+                image = pokemonDetail.sprites.back_shiny_female,
+                name = "Back Female Shiny"
+            ),
+        ).filter { it.image != null }
+    }
+
     private fun getImageFromPokemonDetail(pokemonDetail: PokemonContract): String? {
-        return pokemonDetail.sprites.front_default ?: pokemonDetail.sprites.front_female
-        ?: pokemonDetail.sprites.front_shiny ?: pokemonDetail.sprites.front_shiny
+        return pokemonDetail.sprites.other.official_artwork.front_default
+            ?: pokemonDetail.sprites.other.dream_world.front_default
+            ?: pokemonDetail.sprites.other.dream_world.front_female
+            ?: pokemonDetail.sprites.front_default ?: pokemonDetail.sprites.front_shiny
+            ?: pokemonDetail.sprites.front_female ?: pokemonDetail.sprites.front_shiny_female
+            ?: pokemonDetail.sprites.back_default ?: pokemonDetail.sprites.back_shiny
+            ?: pokemonDetail.sprites.back_female ?: pokemonDetail.sprites.back_shiny_female
     }
 
     private suspend fun convertSpecieToPokemonDetail(specieContract: PokemonSpecieContract): ChainEntity {
@@ -105,7 +147,8 @@ class PokemonInteractorImpl(
         val pokemonDetail = pokemonRepository.getPokemonByUrl(pokemonDefaultVariety.pokemon.url)
         return ChainEntity(
             name = pokemonDetail.name,
-            image = getImageFromPokemonDetail(pokemonDetail)
+            image = getImageFromPokemonDetail(pokemonDetail),
+            pokemonDetailUrl = pokemonDefaultVariety.pokemon.url
         )
     }
 

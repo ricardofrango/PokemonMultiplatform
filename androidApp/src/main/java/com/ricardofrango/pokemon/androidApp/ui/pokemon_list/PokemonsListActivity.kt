@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kennyc.view.MultiStateView
-import com.ricardofrango.pokemon.androidApp.BaseActivity
+import com.ricardofrango.pokemon.androidApp.ui.BaseActivity
 import com.ricardofrango.pokemon.androidApp.R
 import com.ricardofrango.pokemon.androidApp.ui.pokemon_detail.PokemonDetailActivity
 import com.ricardofrango.pokemon.androidApp.ui.pokemon_list.adapter.IPokemonsAdapter

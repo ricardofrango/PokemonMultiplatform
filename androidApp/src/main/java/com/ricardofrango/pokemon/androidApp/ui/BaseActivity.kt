@@ -1,4 +1,4 @@
-package com.ricardofrango.pokemon.androidApp
+package com.ricardofrango.pokemon.androidApp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

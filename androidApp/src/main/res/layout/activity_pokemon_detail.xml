@@ -16,8 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivHeader"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/ivHeaderImages"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toTopOf="@id/tvPokemonNumber"
@@ -48,7 +48,7 @@
                 app:layout_constraintEnd_toStartOf="@id/tvPokemonGeneration"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ivHeader"
+                app:layout_constraintTop_toBottomOf="@id/ivHeaderImages"
                 tools:text="Baulbasaur" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -61,7 +61,7 @@
                 app:layout_constraintBottom_toTopOf="@id/bPokemonNameTypeBarrier"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvPokemonNumber"
-                app:layout_constraintTop_toBottomOf="@id/ivHeader"
+                app:layout_constraintTop_toBottomOf="@id/ivHeaderImages"
                 tools:text="Baulbasaur" />
 
             <androidx.constraintlayout.widget.Barrier
@@ -80,8 +80,29 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/rvEvolutionChain"
                 app:layout_constraintTop_toBottomOf="@id/bPokemonNameTypeBarrier"
                 tools:text="Baulbasaur" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvEvolutionChain"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                app:layout_constraintTop_toBottomOf="@id/tvPokemonType"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/rvVarieties"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvVarieties"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                app:layout_constraintTop_toBottomOf="@id/rvEvolutionChain"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

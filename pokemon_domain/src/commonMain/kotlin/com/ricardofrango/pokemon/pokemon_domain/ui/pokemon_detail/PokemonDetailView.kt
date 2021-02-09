@@ -8,5 +8,6 @@ interface PokemonDetailView : BaseView {
     fun errorLoadingPokemonDetails()
     fun showPokemonDetails(pokemonDetailModel: PokemonDetailModel)
     fun getPokemonId(): Int
+    fun getPokemonUrl(): String?
     fun wrongPokemonId()
 }

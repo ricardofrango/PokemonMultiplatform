@@ -3,7 +3,7 @@ package com.ricardofrango.pokemon.pokemon_domain.interactor.models
 data class PokemonDetailEntity(
     val name: String,
     val number: Int,
-    val image: String?,
+    val images: List<ImageEntity>,
     val url: String,
     val types: String,
     val evolutionChain: List<ChainEntity>,

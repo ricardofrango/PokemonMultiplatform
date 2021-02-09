@@ -5,31 +5,45 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View
+import android.view.View.*
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
-import com.bumptech.glide.Glide
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.kennyc.view.MultiStateView
-import com.ricardofrango.pokemon.androidApp.BaseActivity
+import com.ricardofrango.pokemon.androidApp.ui.BaseActivity
 import com.ricardofrango.pokemon.androidApp.BuildConfig
 import com.ricardofrango.pokemon.androidApp.R
+import com.ricardofrango.pokemon.androidApp.ui.pokemon_detail.adapter.IPokemonImagesAdapter
+import com.ricardofrango.pokemon.androidApp.ui.pokemon_detail.adapter.PokemonImagesAdapter
 import com.ricardofrango.pokemon.pokemon_domain.interactor.PokemonInteractorImpl
 import com.ricardofrango.pokemon.pokemon_domain.networking.PokemonHttpClient
 import com.ricardofrango.pokemon.pokemon_domain.repository.PokemonRepositoryImpl
 import com.ricardofrango.pokemon.pokemon_domain.ui.pokemon_detail.PokemonDetailPresenter
 import com.ricardofrango.pokemon.pokemon_domain.ui.pokemon_detail.PokemonDetailView
 import com.ricardofrango.pokemon.pokemon_domain.ui.pokemon_detail.model.PokemonDetailModel
+import com.ricardofrango.pokemon.pokemon_domain.ui.pokemon_detail.model.PokemonImageModel
+import com.ricardofrango.pokemon.pokemon_domain.ui.pokemon_detail.model.PokemonModel
 
-class PokemonDetailActivity : BaseActivity<PokemonDetailPresenter, PokemonDetailView>(), PokemonDetailView {
+class PokemonDetailActivity : BaseActivity<PokemonDetailPresenter, PokemonDetailView>(),
+    PokemonDetailView, IPokemonImagesAdapter<PokemonModel> {
 
     companion object {
 
-        private const val EXTRA_POKEMON_ID = "${BuildConfig.APPLICATION_ID}.EXTRA_POKEMON_ID"
+        private const val EXTRA_POKEMON_ID = "${BuildConfig.APPLICATION_ID}.EXTRA_POKEMON_URL"
+        private const val EXTRA_POKEMON_URL = "${BuildConfig.APPLICATION_ID}.EXTRA_POKEMON_ID"
 
-        fun startPokemonDetailActivity(context: Context, id : Int) {
+        fun startPokemonDetailActivity(context: Context, id: Int) {
             context.startActivity(Intent(context, PokemonDetailActivity::class.java).apply {
                 putExtra(EXTRA_POKEMON_ID, id)
+            })
+        }
+
+        fun startPokemonDetailActivity(context: Context, url: String) {
+            context.startActivity(Intent(context, PokemonDetailActivity::class.java).apply {
+                putExtra(EXTRA_POKEMON_URL, url)
             })
         }
     }
@@ -38,18 +52,42 @@ class PokemonDetailActivity : BaseActivity<PokemonDetailPresenter, PokemonDetail
         return PokemonDetailPresenter(PokemonInteractorImpl(PokemonRepositoryImpl(PokemonHttpClient())))
     }
 
-    private val pokemonDetailMSV : MultiStateView by lazy { findViewById(R.id.msvPokemonDetail) }
-    private val pokemonDetailHeader : AppCompatImageView by lazy { findViewById(R.id.ivHeader) }
-    private val pokemonDetailNumber : AppCompatTextView by lazy { findViewById(R.id.tvPokemonNumber) }
-    private val pokemonNumberBackground : AppCompatImageView by lazy { findViewById(R.id.ivPokemonNumberBackground) }
-    private val pokemonGeneration : AppCompatTextView by lazy { findViewById(R.id.tvPokemonGeneration) }
-    private val pokemonType : AppCompatTextView by lazy { findViewById(R.id.tvPokemonType) }
+    private val imagesAdapter by lazy { PokemonImagesAdapter<PokemonImageModel>(true) }
+    private val evolutionChainAdapter by lazy { PokemonImagesAdapter<PokemonModel>(false, this) }
+    private val varietiesAdapter by lazy { PokemonImagesAdapter<PokemonModel>(false, this) }
+
+    private val pokemonDetailMSV: MultiStateView by lazy { findViewById(R.id.msvPokemonDetail) }
+    private val pokemonDetailImagesPager: ViewPager2 by lazy { findViewById(R.id.ivHeaderImages) }
+    private val pokemonDetailNumber: AppCompatTextView by lazy { findViewById(R.id.tvPokemonNumber) }
+    private val pokemonNumberBackground: AppCompatImageView by lazy { findViewById(R.id.ivPokemonNumberBackground) }
+    private val pokemonGeneration: AppCompatTextView by lazy { findViewById(R.id.tvPokemonGeneration) }
+    private val pokemonType: AppCompatTextView by lazy { findViewById(R.id.tvPokemonType) }
+    private val pokemonEvolutionChain: RecyclerView by lazy { findViewById(R.id.rvEvolutionChain) }
+    private val pokemonVarieties: RecyclerView by lazy { findViewById(R.id.rvVarieties) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pokemon_detail)
 
         supportActionBar?.hide()
+
+        setupView()
+    }
+
+    private fun setupView() {
+        pokemonDetailImagesPager.run {
+            adapter = imagesAdapter
+        }
+        pokemonEvolutionChain.run {
+            adapter = evolutionChainAdapter
+            layoutManager =
+                LinearLayoutManager(this@PokemonDetailActivity, RecyclerView.HORIZONTAL, false)
+        }
+        pokemonVarieties.run {
+            adapter = varietiesAdapter
+            layoutManager =
+                LinearLayoutManager(this@PokemonDetailActivity, RecyclerView.HORIZONTAL, false)
+        }
     }
 
     override fun loadingPokemonDetails() {
@@ -65,10 +103,20 @@ class PokemonDetailActivity : BaseActivity<PokemonDetailPresenter, PokemonDetail
         supportActionBar?.title = pokemonDetailModel.name
         supportActionBar?.show()
 
-        pokemonDetailModel.image?.let {
-            pokemonDetailHeader.visibility = VISIBLE
-            Glide.with(this).load(it).into(pokemonDetailHeader)
-        } ?: run { pokemonDetailHeader.visibility = GONE }
+        pokemonDetailModel.evolutionChain.takeIf { it.isNotEmpty() }?.let {
+            evolutionChainAdapter.setImages(it)
+            pokemonEvolutionChain.visibility = VISIBLE
+        } ?: run { pokemonEvolutionChain.visibility = GONE }
+
+        pokemonDetailModel.varieties.takeIf { it.isNotEmpty() }?.let {
+            varietiesAdapter.setImages(it)
+            pokemonVarieties.visibility = VISIBLE
+        } ?: run { pokemonVarieties.visibility = GONE }
+
+        pokemonDetailModel.images.takeIf { it.isNotEmpty() }?.let {
+            imagesAdapter.setImages(it)
+            pokemonDetailImagesPager.visibility = VISIBLE
+        } ?: run { pokemonDetailImagesPager.visibility = INVISIBLE }
 
         val color = if (pokemonDetailModel.isDarkColor) R.color.white else R.color.black
 
@@ -83,8 +131,13 @@ class PokemonDetailActivity : BaseActivity<PokemonDetailPresenter, PokemonDetail
     }
 
     override fun getPokemonId(): Int = intent.getIntExtra(EXTRA_POKEMON_ID, 0)
+    override fun getPokemonUrl(): String? = intent.getStringExtra(EXTRA_POKEMON_URL)
 
     override fun wrongPokemonId() {
         pokemonDetailMSV.viewState = MultiStateView.ViewState.ERROR
+    }
+
+    override fun onItemClicked(positionClicked: Int, itemClicked: PokemonModel, viewClicked: View) {
+        PokemonDetailActivity.startPokemonDetailActivity(this, itemClicked.pokemonDetailUrl)
     }
 }
