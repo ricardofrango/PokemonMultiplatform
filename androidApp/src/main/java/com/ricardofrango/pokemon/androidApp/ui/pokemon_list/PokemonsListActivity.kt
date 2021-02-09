@@ -39,7 +39,7 @@ class PokemonsListActivity : BaseActivity<PokemonListPresenter, PokemonListView>
     private val pokemonsMSV: MultiStateView by lazy { findViewById(R.id.msvPokemonsList) }
     private val pokemonsListAdapter: PokemonsAdapter by lazy { PokemonsAdapter(this) }
 
-    private var listMode: ListMode = ListMode.LIST
+    private var listMode: ListMode = ListMode.GRID
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

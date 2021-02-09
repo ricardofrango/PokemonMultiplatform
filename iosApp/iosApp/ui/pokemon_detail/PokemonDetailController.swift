@@ -12,13 +12,14 @@ import pokemon_domain
 class PokemonDetailController: BaseController<PokemonDetailPresenter, PokemonDetailView>, PokemonDetailView {
     
     var pokemonNumber : Int32 = 0
+    var pokemonUrl : String? = nil
     
-    override func viewDidLoad() {
-        print(pokemonNumber)
+    override func createPresenter() -> PokemonDetailPresenter? {
+        return PokemonDetailPresenter(pokemonInteractor: PokemonInteractorImpl(pokemonRepository: PokemonRepositoryImpl.init(pokemonHttpClient: PokemonHttpClient())))
     }
     
     func errorLoadingPokemonDetails() {
-        
+        print("errorLoadingPokemonDetails")
     }
     
     func getPokemonId() -> Int32 {
@@ -26,17 +27,19 @@ class PokemonDetailController: BaseController<PokemonDetailPresenter, PokemonDet
     }
     
     func loadingPokemonDetails() {
-        
+        print("loadingPokemonDetails")
     }
     
     func showPokemonDetails(pokemonDetailModel: PokemonDetailModel) {
-        
+        print("showPokemonDetails")
     }
     
     func wrongPokemonId() {
-        
+        print("wrongPokemonId")
     }
     
-    
+    func getPokemonUrl() -> String? {
+        return pokemonUrl
+    }
     
 }

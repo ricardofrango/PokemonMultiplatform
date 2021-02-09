@@ -49,15 +49,15 @@ class PokemonListController : BaseController<PokemonListPresenter, PokemonListVi
         pokemonListDataSource.addPokemonItems(pokemonList: pokemonListModel)
     }
     
+    func noMorePokemonsToLoad() {
+        
+    }
+    
     func onPokemonClicked(pokemonClicked: PokemonItemModel) {
-        let pokemonDetailController = self.storyboard?.instantiateViewController(identifier: "PokemonDetailController") as! PokemonDetailController
+        let pokemonDetailController = self.storyboard?.instantiateViewController(identifier: "PokemonDetailControllerId") as! PokemonDetailController
         
         pokemonDetailController.pokemonNumber = pokemonClicked.number
-        
-        let nvc = self.storyboard?.instantiateViewController(withIdentifier: "NVC") as! UINavigationController
-        
-        nvc.pushViewController(pokemonDetailController, animated: true)
-        
-        self.navigationController?.pushViewController(nvc, animated: true)
+
+        self.navigationController?.pushViewController(pokemonDetailController, animated: true)
     }
 }

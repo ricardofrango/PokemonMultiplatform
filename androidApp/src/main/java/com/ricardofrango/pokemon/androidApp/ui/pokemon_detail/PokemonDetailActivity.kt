@@ -9,6 +9,7 @@ import android.view.View
 import android.view.View.*
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -64,6 +65,8 @@ class PokemonDetailActivity : BaseActivity<PokemonDetailPresenter, PokemonDetail
     private val pokemonType: AppCompatTextView by lazy { findViewById(R.id.tvPokemonType) }
     private val pokemonEvolutionChain: RecyclerView by lazy { findViewById(R.id.rvEvolutionChain) }
     private val pokemonVarieties: RecyclerView by lazy { findViewById(R.id.rvVarieties) }
+    private val pokemonGroupVarieties: Group by lazy { findViewById(R.id.gVarieties) }
+    private val pokemonGroupEvolutionChain: Group by lazy { findViewById(R.id.gEvolutionChain) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,13 +108,13 @@ class PokemonDetailActivity : BaseActivity<PokemonDetailPresenter, PokemonDetail
 
         pokemonDetailModel.evolutionChain.takeIf { it.isNotEmpty() }?.let {
             evolutionChainAdapter.setImages(it)
-            pokemonEvolutionChain.visibility = VISIBLE
-        } ?: run { pokemonEvolutionChain.visibility = GONE }
+            pokemonGroupEvolutionChain.visibility = VISIBLE
+        } ?: run { pokemonGroupEvolutionChain.visibility = GONE }
 
         pokemonDetailModel.varieties.takeIf { it.isNotEmpty() }?.let {
             varietiesAdapter.setImages(it)
-            pokemonVarieties.visibility = VISIBLE
-        } ?: run { pokemonVarieties.visibility = GONE }
+            pokemonGroupVarieties.visibility = VISIBLE
+        } ?: run { pokemonGroupVarieties.visibility = GONE }
 
         pokemonDetailModel.images.takeIf { it.isNotEmpty() }?.let {
             imagesAdapter.setImages(it)

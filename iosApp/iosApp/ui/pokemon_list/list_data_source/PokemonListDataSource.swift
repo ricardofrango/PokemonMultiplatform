@@ -32,7 +32,7 @@ class PokemonListDataSource : NSObject, UITableViewDelegate, UITableViewDataSour
         let cell = tableview.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! PokemonRowCell
         cell.backgroundColor = UIColor.white
         cell.dayLabel.text = pokemon.name
-        downloadImage(uiImageView: cell.imageUiView, from: URL.init(string: pokemon.imageUrl)!)
+        downloadImage(uiImageView: cell.imageUiView, from: URL.init(string: pokemon.imageUrl!)!)
         return cell
     }
     

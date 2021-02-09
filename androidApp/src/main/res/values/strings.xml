@@ -3,4 +3,6 @@
     <string name="grid">Grid</string>
     <string name="list">List</string>
     <string name="pokemons">Pokemons</string>
+    <string name="evolution_chain">Evolution Chain</string>
+    <string name="varieties">Varieties</string>
 </resources>

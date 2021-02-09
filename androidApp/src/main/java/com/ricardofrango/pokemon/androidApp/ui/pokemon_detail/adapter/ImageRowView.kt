@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.bumptech.glide.Glide
 import com.ricardofrango.pokemon.androidApp.R
@@ -18,9 +19,11 @@ class ImageRowView @JvmOverloads constructor(
 ) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
     private val pokemonImage: AppCompatImageView by lazy { findViewById(R.id.ivPokemonImage) }
+    private val pokemonName: AppCompatTextView by lazy { findViewById(R.id.ivPokemonName) }
 
     init {
         inflate(context, R.layout.row_pokemon_image, this)
+        orientation = VERTICAL
     }
 
     fun <T : IPokemonImageModel> bind(item: T, widthMatchParent: Boolean) {
@@ -30,5 +33,6 @@ class ImageRowView @JvmOverloads constructor(
             LayoutParams(if (widthMatchParent) MATCH_PARENT else WRAP_CONTENT, MATCH_PARENT)
 
         Glide.with(this).load(item.getImageUrl()).into(pokemonImage)
+        pokemonName.text = item.getName()
     }
 }

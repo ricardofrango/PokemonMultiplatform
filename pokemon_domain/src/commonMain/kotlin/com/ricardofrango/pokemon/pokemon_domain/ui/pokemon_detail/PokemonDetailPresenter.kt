@@ -64,7 +64,7 @@ class PokemonDetailPresenter(private val pokemonInteractor: PokemonInteractor) :
             name = pokemonDetail.name,
             number = pokemonDetail.number,
             images = pokemonDetail.images.filter { it.image != null && !it.image.endsWith("svg") }
-                .map { PokemonImageModel(it.image!!, it.name, "") },
+                .map { PokemonImageModel(it.image!!, it.name) },
             url = pokemonDetail.url,
             color = pokemonDetail.color,
             isDarkColor = pokemonDetail.isDarkColor,

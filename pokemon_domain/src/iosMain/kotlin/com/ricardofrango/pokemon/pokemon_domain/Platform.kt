@@ -8,10 +8,10 @@ actual class Platform actual constructor() {
         UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
 
     actual fun getColorFrom(text: String): Int {
-        TODO("Not yet implemented")
+        return 0
     }
 
     actual fun isDark(color: Int): Boolean {
-        TODO("Not yet implemented")
+        return false
     }
 }
