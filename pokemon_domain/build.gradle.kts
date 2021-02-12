@@ -10,7 +10,7 @@ plugins {
 kotlin {
     val serializationVersion = "1.0.1"
     val coroutinesVersion = "1.4.1"
-    val ktorVersion = "1.5.0"
+    val ktorVersion = "1.5.1"
 
     android()
     ios {
@@ -37,7 +37,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("com.google.android.material:material:1.2.1")
+                implementation("com.google.android.material:material:1.3.0")
                 implementation("io.ktor:ktor-client-android:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
             }

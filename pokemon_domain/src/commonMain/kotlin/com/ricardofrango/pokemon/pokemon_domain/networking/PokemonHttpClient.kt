@@ -4,9 +4,10 @@ import com.ricardofrango.pokemon.pokemon_domain.networking.models.PokemonContrac
 import com.ricardofrango.pokemon.pokemon_domain.networking.models.PokemonEvolutionChainDetailContract
 import com.ricardofrango.pokemon.pokemon_domain.networking.models.PokemonListContract
 import com.ricardofrango.pokemon.pokemon_domain.networking.models.PokemonSpecieDetailContract
-import io.ktor.client.HttpClient
+import io.ktor.client.*
+import io.ktor.client.features.cache.*
 import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.client.features.json.serializer.*
 import io.ktor.client.request.*
 import kotlinx.serialization.json.Json
 
@@ -26,21 +27,26 @@ class PokemonHttpClient {
             }
             serializer = KotlinxSerializer(json)
         }
+        install(HttpCache) {
+
+        }
     }
 
-    suspend fun getPokemons(offset : Int, limit : Int = 99): PokemonListContract {
-        return httpClient.get(POKEMON_LIST.replace("[OFFSET]", offset.toString()).replace("[LIMIT]", limit.toString()))
+    suspend fun getPokemons(offset: Int, limit: Int = 99): PokemonListContract {
+        return httpClient.get(
+            POKEMON_LIST.replace("[OFFSET]", offset.toString()).replace("[LIMIT]", limit.toString())
+        )
     }
 
-    suspend fun getPokemonByNumber(number : Int): PokemonContract {
+    suspend fun getPokemonByNumber(number: Int): PokemonContract {
         return httpClient.get("$POKEMON$number")
     }
 
-    suspend fun getPokemonByPath(path : String): PokemonContract {
+    suspend fun getPokemonByPath(path: String): PokemonContract {
         return httpClient.get(path)
     }
 
-    suspend fun getPokemonSpecie(path : String): PokemonSpecieDetailContract {
+    suspend fun getPokemonSpecie(path: String): PokemonSpecieDetailContract {
         return httpClient.get(path)
     }
 
