@@ -15,12 +15,16 @@ class PokemonDetailController: BaseController<PokemonDetailPresenter, PokemonDet
     private var imageDownloader = ImageViewDownloader()
     
     @IBOutlet weak var headerImageView: UIImageView!
+    @IBOutlet weak var tvPokemonName: UITextView!
     
     var pokemonNumber : Int32 = 0
     var pokemonUrl : String? = nil
     
     override func createPresenter() -> PokemonDetailPresenter? {
         return PokemonDetailPresenter(pokemonInteractor: PokemonInteractorImpl(pokemonRepository: PokemonRepositoryImpl.init(pokemonHttpClient: PokemonHttpClient())))
+    }
+    
+    override func viewDidLoad() {
     }
     
     func errorLoadingPokemonDetails() {
@@ -38,6 +42,8 @@ class PokemonDetailController: BaseController<PokemonDetailPresenter, PokemonDet
     func showPokemonDetails(pokemonDetailModel: PokemonDetailModel) {
         
         loadHeader(pokemonDetailModel: pokemonDetailModel)
+        tvPokemonName.text = "\(pokemonDetailModel.number) - \(pokemonDetailModel.name)"
+        tvPokemonName.sizeToFit()
     }
     
     private func loadHeader(pokemonDetailModel: PokemonDetailModel) {

@@ -29,16 +29,24 @@
         <scene sceneID="Czo-0t-Qn5">
             <objects>
                 <viewController storyboardIdentifier="PokemonDetailControllerId" id="ABS-QQ-7k3" customClass="PokemonDetailController" customModule="iosApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="TTD-ly-DkR">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="TTD-ly-DkR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Ib-aU-HHd">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Ib-aU-HHd">
                                 <rect key="frame" x="0.0" y="44" width="414" height="233"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8Ib-aU-HHd" secondAttribute="height" multiplier="16:9" id="AJN-dq-duV"/>
                                 </constraints>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" ambiguous="YES" scrollEnabled="NO" indicatorStyle="black" id="KnY-3s-UV3">
+                                <rect key="frame" x="0.0" y="285" width="414" height="61"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" label="text"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="i4q-9R-P5y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -46,10 +54,14 @@
                             <constraint firstItem="8Ib-aU-HHd" firstAttribute="top" secondItem="i4q-9R-P5y" secondAttribute="top" id="4Mb-gy-keb"/>
                             <constraint firstItem="8Ib-aU-HHd" firstAttribute="leading" secondItem="i4q-9R-P5y" secondAttribute="leading" id="EVW-aG-m0L"/>
                             <constraint firstItem="8Ib-aU-HHd" firstAttribute="trailing" secondItem="i4q-9R-P5y" secondAttribute="trailing" id="Ex7-QK-rJj"/>
+                            <constraint firstItem="KnY-3s-UV3" firstAttribute="top" secondItem="8Ib-aU-HHd" secondAttribute="bottom" constant="8" symbolic="YES" id="i1Y-jk-cWe"/>
+                            <constraint firstItem="KnY-3s-UV3" firstAttribute="leading" secondItem="i4q-9R-P5y" secondAttribute="leading" id="iTD-uO-e9e"/>
+                            <constraint firstItem="i4q-9R-P5y" firstAttribute="trailing" secondItem="KnY-3s-UV3" secondAttribute="trailing" id="wkE-WK-dX0"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="headerImageView" destination="8Ib-aU-HHd" id="qxY-Fx-V60"/>
+                        <outlet property="tvPokemonName" destination="KnY-3s-UV3" id="T3A-eq-ey6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wAj-qf-9rg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
