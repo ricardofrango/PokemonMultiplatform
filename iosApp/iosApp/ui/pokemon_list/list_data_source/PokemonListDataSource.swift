@@ -12,6 +12,11 @@ import UIKit
 
 class PokemonListDataSource : NSObject, UITableViewDelegate, UITableViewDataSource {
     
+    override init() {
+        imageDownloader = ImageViewDownloader()
+    }
+    
+    private var imageDownloader : ImageViewDownloader?
     var onItemClicked : PokemonListClickProtocol?
     private var pokemonsList : [PokemonItemModel] = []
     
@@ -32,7 +37,7 @@ class PokemonListDataSource : NSObject, UITableViewDelegate, UITableViewDataSour
         let cell = tableview.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! PokemonRowCell
         cell.backgroundColor = UIColor.white
         cell.dayLabel.text = pokemon.name
-        downloadImage(uiImageView: cell.imageUiView, from: URL.init(string: pokemon.imageUrl!)!)
+        imageDownloader?.downloadImage(uiImageView: cell.imageUiView, from: URL.init(string: pokemon.imageUrl!)!)
         return cell
     }
     
@@ -43,16 +48,6 @@ class PokemonListDataSource : NSObject, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
-    }
-    
-    func downloadImage(uiImageView : UIImageView, from url: URL) {
-        getData(from: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            //print(response?.suggestedFilename ?? url.lastPathComponent)
-            DispatchQueue.main.async() { [weak self] in
-                uiImageView.image = UIImage(data: data)
-            }
-        }
     }
     
     func setupTableView(view : UIView) {
@@ -69,10 +64,6 @@ class PokemonListDataSource : NSObject, UITableViewDelegate, UITableViewDataSour
             tableview.rightAnchor.constraint(equalTo: view.rightAnchor),
             tableview.leftAnchor.constraint(equalTo: view.leftAnchor)
         ])
-    }
-    
-    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
     func addPokemonItems(pokemonList: PokemonsListModel) {

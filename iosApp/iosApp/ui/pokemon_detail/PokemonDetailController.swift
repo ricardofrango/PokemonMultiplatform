@@ -8,8 +8,13 @@
 
 import Foundation
 import pokemon_domain
+import UIKit
 
 class PokemonDetailController: BaseController<PokemonDetailPresenter, PokemonDetailView>, PokemonDetailView {
+    
+    private var imageDownloader = ImageViewDownloader()
+    
+    @IBOutlet weak var headerImageView: UIImageView!
     
     var pokemonNumber : Int32 = 0
     var pokemonUrl : String? = nil
@@ -31,7 +36,15 @@ class PokemonDetailController: BaseController<PokemonDetailPresenter, PokemonDet
     }
     
     func showPokemonDetails(pokemonDetailModel: PokemonDetailModel) {
-        print("showPokemonDetails")
+        
+        loadHeader(pokemonDetailModel: pokemonDetailModel)
+    }
+    
+    private func loadHeader(pokemonDetailModel: PokemonDetailModel) {
+        guard let url = pokemonDetailModel.images.first?.getImageUrl() else {
+            return
+        }
+        imageDownloader.downloadImage(uiImageView: headerImageView, from: URL(string: url))
     }
     
     func wrongPokemonId() {
@@ -41,5 +54,6 @@ class PokemonDetailController: BaseController<PokemonDetailPresenter, PokemonDet
     func getPokemonUrl() -> String? {
         return pokemonUrl
     }
+    
     
 }
