@@ -16,6 +16,7 @@ class PokemonDetailController: BaseController<PokemonDetailPresenter, PokemonDet
     
     @IBOutlet weak var headerImageView: UIImageView!
     @IBOutlet weak var tvPokemonName: UITextView!
+    @IBOutlet weak var tvPokemonTypes: UITextView!
     
     var pokemonNumber : Int32 = 0
     var pokemonUrl : String? = nil
@@ -40,10 +41,10 @@ class PokemonDetailController: BaseController<PokemonDetailPresenter, PokemonDet
     }
     
     func showPokemonDetails(pokemonDetailModel: PokemonDetailModel) {
-        
         loadHeader(pokemonDetailModel: pokemonDetailModel)
-        tvPokemonName.text = "\(pokemonDetailModel.number) - \(pokemonDetailModel.name)"
-        tvPokemonName.sizeToFit()
+        tvPokemonName.text = "\(pokemonDetailModel.number) - \(pokemonDetailModel.generation)"
+        title = pokemonDetailModel.name
+        tvPokemonTypes.text = pokemonDetailModel.types
     }
     
     private func loadHeader(pokemonDetailModel: PokemonDetailModel) {
