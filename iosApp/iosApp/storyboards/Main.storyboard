@@ -53,19 +53,29 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Evolution Chain" translatesAutoresizingMaskIntoConstraints="NO" id="alX-gg-U9d">
+                                <rect key="frame" x="0.0" y="408" width="414" height="36.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="i4q-9R-P5y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="alX-gg-U9d" firstAttribute="leading" secondItem="i4q-9R-P5y" secondAttribute="leading" id="2MI-gL-uFA"/>
                             <constraint firstItem="8Ib-aU-HHd" firstAttribute="top" secondItem="i4q-9R-P5y" secondAttribute="top" id="4Mb-gy-keb"/>
                             <constraint firstItem="cN3-cI-ajp" firstAttribute="top" secondItem="KnY-3s-UV3" secondAttribute="bottom" constant="8" symbolic="YES" id="8Ma-oo-8pZ"/>
                             <constraint firstItem="8Ib-aU-HHd" firstAttribute="trailing" secondItem="KnY-3s-UV3" secondAttribute="trailing" id="9Nt-9b-gEk" userLabel="Header Image View.trailing = Safe Area.trailing"/>
                             <constraint firstItem="KnY-3s-UV3" firstAttribute="trailing" secondItem="i4q-9R-P5y" secondAttribute="trailing" id="CGF-mC-dGP"/>
+                            <constraint firstItem="alX-gg-U9d" firstAttribute="trailing" secondItem="i4q-9R-P5y" secondAttribute="trailing" id="GZA-N5-Exn"/>
                             <constraint firstItem="cN3-cI-ajp" firstAttribute="leading" secondItem="i4q-9R-P5y" secondAttribute="leading" id="Q4x-R6-5al"/>
                             <constraint firstItem="KnY-3s-UV3" firstAttribute="leading" secondItem="i4q-9R-P5y" secondAttribute="leading" id="SjG-Nz-ooa"/>
                             <constraint firstItem="KnY-3s-UV3" firstAttribute="top" secondItem="8Ib-aU-HHd" secondAttribute="bottom" constant="8" symbolic="YES" id="i1Y-jk-cWe"/>
                             <constraint firstAttribute="trailing" secondItem="cN3-cI-ajp" secondAttribute="trailing" id="i4g-EV-NkJ" userLabel="Tv Pokemon Types.trailing = Safe Area.trailing"/>
                             <constraint firstItem="8Ib-aU-HHd" firstAttribute="leading" secondItem="i4q-9R-P5y" secondAttribute="leading" id="lcf-rF-Hxq"/>
+                            <constraint firstItem="alX-gg-U9d" firstAttribute="top" secondItem="cN3-cI-ajp" secondAttribute="bottom" constant="30" id="vmG-iK-E5o"/>
                         </constraints>
                     </view>
                     <connections>
@@ -98,6 +108,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
