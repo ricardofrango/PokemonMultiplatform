@@ -17,6 +17,8 @@ class PokemonDetailController: BaseController<PokemonDetailPresenter, PokemonDet
     @IBOutlet weak var headerImageView: UIImageView!
     @IBOutlet weak var tvPokemonName: UITextView!
     @IBOutlet weak var tvPokemonTypes: UITextView!
+    @IBOutlet weak var cvEvolutionChain: UICollectionView!
+    @IBOutlet weak var cvVarieties: UICollectionView!
     
     var pokemonNumber : Int32 = 0
     var pokemonUrl : String? = nil
