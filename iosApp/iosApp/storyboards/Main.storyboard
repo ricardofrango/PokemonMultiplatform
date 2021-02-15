@@ -39,7 +39,7 @@
                                     <constraint firstAttribute="width" secondItem="8Ib-aU-HHd" secondAttribute="height" multiplier="16:9" id="AJN-dq-duV"/>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KnY-3s-UV3">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KnY-3s-UV3">
                                 <rect key="frame" x="0.0" y="285" width="414" height="52"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -47,31 +47,56 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cN3-cI-ajp">
-                                <rect key="frame" x="0.0" y="345" width="414" height="33"/>
+                                <rect key="frame" x="0.0" y="345" width="414" height="32.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Evolution Chain" translatesAutoresizingMaskIntoConstraints="NO" id="alX-gg-U9d">
-                                <rect key="frame" x="0.0" y="408" width="414" height="36.5"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" scrollEnabled="NO" text="Evolution Chain" translatesAutoresizingMaskIntoConstraints="NO" id="alX-gg-U9d">
+                                <rect key="frame" x="0.0" y="407.5" width="414" height="36.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" scrollEnabled="NO" text="Varieties" translatesAutoresizingMaskIntoConstraints="NO" id="sh4-1F-wEE">
+                                <rect key="frame" x="0.0" y="632" width="414" height="37"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" id="2WB-DG-AGa">
+                                <rect key="frame" x="0.0" y="452" width="414" height="150"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Qoi-y2-J5D"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="p2d-x0-WGl"/>
+                            </scrollView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" id="CrO-4H-tmW">
+                                <rect key="frame" x="0.0" y="677" width="414" height="150"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="YLl-J5-w9L"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="RBf-5U-Q95"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="i4q-9R-P5y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="2WB-DG-AGa" firstAttribute="leading" secondItem="i4q-9R-P5y" secondAttribute="leading" id="040-vo-ySk"/>
                             <constraint firstItem="alX-gg-U9d" firstAttribute="leading" secondItem="i4q-9R-P5y" secondAttribute="leading" id="2MI-gL-uFA"/>
+                            <constraint firstItem="2WB-DG-AGa" firstAttribute="top" secondItem="alX-gg-U9d" secondAttribute="bottom" constant="8" symbolic="YES" id="3QX-dC-oqj"/>
                             <constraint firstItem="8Ib-aU-HHd" firstAttribute="top" secondItem="i4q-9R-P5y" secondAttribute="top" id="4Mb-gy-keb"/>
                             <constraint firstItem="cN3-cI-ajp" firstAttribute="top" secondItem="KnY-3s-UV3" secondAttribute="bottom" constant="8" symbolic="YES" id="8Ma-oo-8pZ"/>
                             <constraint firstItem="8Ib-aU-HHd" firstAttribute="trailing" secondItem="KnY-3s-UV3" secondAttribute="trailing" id="9Nt-9b-gEk" userLabel="Header Image View.trailing = Safe Area.trailing"/>
                             <constraint firstItem="KnY-3s-UV3" firstAttribute="trailing" secondItem="i4q-9R-P5y" secondAttribute="trailing" id="CGF-mC-dGP"/>
+                            <constraint firstItem="2WB-DG-AGa" firstAttribute="trailing" secondItem="i4q-9R-P5y" secondAttribute="trailing" id="Fr5-jM-GDk"/>
                             <constraint firstItem="alX-gg-U9d" firstAttribute="trailing" secondItem="i4q-9R-P5y" secondAttribute="trailing" id="GZA-N5-Exn"/>
+                            <constraint firstItem="sh4-1F-wEE" firstAttribute="leading" secondItem="CrO-4H-tmW" secondAttribute="leading" id="Kwx-Jb-VeP"/>
                             <constraint firstItem="cN3-cI-ajp" firstAttribute="leading" secondItem="i4q-9R-P5y" secondAttribute="leading" id="Q4x-R6-5al"/>
                             <constraint firstItem="KnY-3s-UV3" firstAttribute="leading" secondItem="i4q-9R-P5y" secondAttribute="leading" id="SjG-Nz-ooa"/>
+                            <constraint firstItem="sh4-1F-wEE" firstAttribute="trailing" secondItem="CrO-4H-tmW" secondAttribute="trailing" id="d7w-Xn-usQ"/>
+                            <constraint firstItem="sh4-1F-wEE" firstAttribute="top" secondItem="2WB-DG-AGa" secondAttribute="bottom" constant="30" id="f0o-tD-RNG"/>
                             <constraint firstItem="KnY-3s-UV3" firstAttribute="top" secondItem="8Ib-aU-HHd" secondAttribute="bottom" constant="8" symbolic="YES" id="i1Y-jk-cWe"/>
                             <constraint firstAttribute="trailing" secondItem="cN3-cI-ajp" secondAttribute="trailing" id="i4g-EV-NkJ" userLabel="Tv Pokemon Types.trailing = Safe Area.trailing"/>
                             <constraint firstItem="8Ib-aU-HHd" firstAttribute="leading" secondItem="i4q-9R-P5y" secondAttribute="leading" id="lcf-rF-Hxq"/>
