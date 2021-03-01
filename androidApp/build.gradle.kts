@@ -28,7 +28,7 @@ android {
     compileSdkVersion(30)
     defaultConfig {
         applicationId = "com.ricardofrango.pokemon.androidApp"
-        minSdkVersion(24)
+        minSdkVersion(19)
         targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"

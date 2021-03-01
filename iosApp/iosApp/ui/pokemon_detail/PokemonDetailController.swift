@@ -14,7 +14,7 @@ class PokemonDetailController: BaseController<PokemonDetailPresenter, PokemonDet
     
     private var imageDownloader = ImageViewDownloader()
     
-    @IBOutlet weak var headerImageView: UIImageView!
+    @IBOutlet weak var ivHeader: UIImageView!
     @IBOutlet weak var tvPokemonName: UITextView!
     @IBOutlet weak var tvPokemonTypes: UITextView!
     @IBOutlet weak var cvEvolutionChain: UICollectionView!
@@ -43,6 +43,7 @@ class PokemonDetailController: BaseController<PokemonDetailPresenter, PokemonDet
     }
     
     func showPokemonDetails(pokemonDetailModel: PokemonDetailModel) {
+        print("showPokemonDetails")
         loadHeader(pokemonDetailModel: pokemonDetailModel)
         tvPokemonName.text = "\(pokemonDetailModel.number) - \(pokemonDetailModel.generation)"
         title = pokemonDetailModel.name
@@ -53,7 +54,7 @@ class PokemonDetailController: BaseController<PokemonDetailPresenter, PokemonDet
         guard let url = pokemonDetailModel.images.first?.getImageUrl() else {
             return
         }
-        imageDownloader.downloadImage(uiImageView: headerImageView, from: URL(string: url))
+        imageDownloader.downloadImage(uiImageView: ivHeader, from: URL(string: url))
     }
     
     func wrongPokemonId() {

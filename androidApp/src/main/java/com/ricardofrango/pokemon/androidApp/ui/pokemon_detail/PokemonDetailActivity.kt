@@ -10,6 +10,9 @@ import android.view.View.*
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.Group
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -123,9 +126,9 @@ class PokemonDetailActivity : BaseActivity<PokemonDetailPresenter, PokemonDetail
 
         val color = if (pokemonDetailModel.isDarkColor) R.color.white else R.color.black
 
-        pokemonDetailNumber.setTextColor(resources.getColor(color, theme))
+        pokemonDetailNumber.setTextColor(ContextCompat.getColor(this, color))
         pokemonDetailNumber.text = "${pokemonDetailModel.number}"
-        pokemonNumberBackground.imageTintList = ColorStateList.valueOf(pokemonDetailModel.color)
+        ImageViewCompat.setImageTintList(pokemonNumberBackground, ColorStateList.valueOf(pokemonDetailModel.color))
 
         pokemonType.text = pokemonDetailModel.types
         pokemonGeneration.text = pokemonDetailModel.generation
